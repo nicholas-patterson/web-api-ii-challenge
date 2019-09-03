@@ -28,7 +28,7 @@ router.post("/:id/comments", (req, res) => {
 
   db.findById(id)
     .then(response => {
-      if (!response) {
+      if (response.length === 0) {
         res
           .status(404)
           .json({ message: "The post with the specified id does not exist" });
@@ -37,7 +37,9 @@ router.post("/:id/comments", (req, res) => {
           .status(400)
           .json({ message: "Please provide text for the comment" });
       } else {
-        db.insertComment(req.body).then(response => {
+        text.post_id = id;
+        db.insertComment(text).then(response => {
+          console.log(response);
           res.status(201).json(response);
         });
       }
