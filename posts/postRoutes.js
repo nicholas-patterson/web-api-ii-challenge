@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../data/db");
 
-// post method for the posts
+// POST METHOD FOR ALL POST
 router.post("/", (req, res) => {
   if (!req.body.title || !req.body.contents) {
     res
@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// post method for comments
+// POST METHOD FOR COMMENTS
 router.post("/:id/comments", (req, res) => {
   const id = req.params.id;
   const text = req.body;
@@ -49,7 +49,7 @@ router.post("/:id/comments", (req, res) => {
     });
 });
 
-// get all post
+// GET METHOD TO ACCESS THE LIST OF POST
 router.get("/", (req, res) => {
   db.find()
     .then(response => {
@@ -62,7 +62,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// get post by id
+// GET METHOD TO GET ALL POST BY ID
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -84,7 +84,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// get comments from the selected post id
+// GET METHOD TO GET COMMENTS ASSOCIATED WITH A SINGLE POST
 router.get("/:id/comments", (req, res) => {
   const id = req.params.id;
 
@@ -105,7 +105,7 @@ router.get("/:id/comments", (req, res) => {
     });
 });
 
-// Delete a post
+// DELTE A SINGLE POST
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
   db.remove(id)
@@ -123,7 +123,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-// put ( update ) a post
+// PUT OR ( UPDATE ) A SINGLE POST
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;
